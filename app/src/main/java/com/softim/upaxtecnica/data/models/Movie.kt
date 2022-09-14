@@ -2,6 +2,7 @@ package com.softim.upaxtecnica.domain.data.models
 
 import com.google.gson.annotations.SerializedName
 
+//Modelo de pelicula que se muestra en el RecyclerView
 data class Movie(
     @SerializedName("id")
     val id : String ? = "",

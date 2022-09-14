@@ -21,16 +21,11 @@ class LocationsService : Service() {
     private val LOG_TAG = "EnviarUbicacion"
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
-    /*private fun notificationLocation(msj: String) {
-        val builder = NotificationCompat.Builder(requireContext(), CHANNEL_ID)
-            .setSmallIcon(R.mipmap.ic_launcher)
-            .setContentTitle("Your Location is")
-            .setContentText(msj)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-        with(NotificationManagerCompat.from(requireContext())) {
-            notify(2, builder.build())
-        }
-    }*/
+    /*
+    * Servicio que muestra las localizacion del ususario cada 5 minutos
+    * Utiliza una notificationCompact para mostrar la ubicacion actual
+    * Falta una pequeña parte para subir la informacion a la Firestore aqui.
+    * */
     private val TAG = "ServiceNotification"
 
     override fun onCreate() {

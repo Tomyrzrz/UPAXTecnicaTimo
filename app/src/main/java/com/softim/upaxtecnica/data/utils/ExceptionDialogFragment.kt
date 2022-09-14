@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.softim.upaxtecnica.R
 
+//Clase para generar un DialogFragment que muestra las exepciones de la App
 class ExceptionDialogFragment(val msj: String, val tittle: String) : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
         AlertDialog.Builder(requireContext())
