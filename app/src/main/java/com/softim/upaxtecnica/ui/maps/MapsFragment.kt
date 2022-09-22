@@ -31,7 +31,9 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.softim.upaxtecnica.R
 import com.softim.upaxtecnica.data.models.UserLocations
 import com.softim.upaxtecnica.data.utils.ExceptionDialogFragment
-import com.softim.upaxtecnica.domain.core.LocationService
+import android.text.format.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MapsFragment : Fragment(), GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener {
 
@@ -66,10 +68,13 @@ class MapsFragment : Fragment(), GoogleMap.OnMyLocationButtonClickListener, Goog
                             for (doc in value){
                                 val user = doc.toObject(UserLocations::class.java)
                                 val location = LatLng(user.latitude!!, user.longitude!!)
+                                val sdf = SimpleDateFormat("MM/dd/yyyy hh:mm aa")
+                                val netDate = Date((user.time?.seconds.toString()).toLong() * 1000)
+                                val dat = sdf.format(netDate)
                                 map.addMarker(
                                     MarkerOptions()
                                         .position(location)
-                                        .title("You")
+                                        .title(dat)
                                 )
                                 map.moveCamera(CameraUpdateFactory.newLatLng(location))
                             }

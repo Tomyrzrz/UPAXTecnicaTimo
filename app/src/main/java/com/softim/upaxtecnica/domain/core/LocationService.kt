@@ -109,7 +109,7 @@ class LocationService: Service(){
 
         myHandler.post(object : Runnable {
             override fun run() {
-                Thread.sleep(60000)
+                Thread.sleep(2000)
                 notifica("Latitude: ${mLastLocation.latitude} Longitude: ${mLastLocation.longitude}")
                 saveLocations(mLastLocation)
                 myHandler.postDelayed(this, 300000 )
