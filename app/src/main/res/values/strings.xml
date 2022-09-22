@@ -20,6 +20,6 @@
     <string-array name="movies_array">
         <item>Popular</item>
         <item>Top_Rated</item>
-        <item>Latest</item>
+        <item>Upcoming</item>
     </string-array>
 </resources>

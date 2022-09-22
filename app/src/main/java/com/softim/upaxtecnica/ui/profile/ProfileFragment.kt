@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.softim.upaxtecnica.R
 import com.softim.upaxtecnica.databinding.FragmentMoviesBinding
 import com.softim.upaxtecnica.databinding.FragmentProfileBinding
+import com.softim.upaxtecnica.domain.CheckInternet
 
 class ProfileFragment : Fragment() {
 
@@ -28,12 +29,16 @@ class ProfileFragment : Fragment() {
         val profileViewModel = ProfileViewModel()
         val IMAGE_BASE = "https://image.tmdb.org/t/p/w500/"
         profileViewModel.profile.observe(viewLifecycleOwner) { person ->
-            binding.txtNameProfile.text = person.name
-            binding.txtBiography.text = person.biography
-            "Popularity: ${person.popularity}".also { binding.txtPopularity.text = it }
-            Glide.with(this).load(IMAGE_BASE + person.profile_path).into(binding.imgProfilePic)
+            if (person != null) {
+                binding.txtNameProfile.text = person.name
+                binding.txtBiography.text = person.biography
+                "Popularity: ${person.popularity}".also { binding.txtPopularity.text = it }
+                Glide.with(this).load(IMAGE_BASE + person.profile_path).into(binding.imgProfilePic)
+            } else
+                setupLocal()
         }
-        setupLocal()
+        if(!CheckInternet.checkForInternet(requireContext()))
+            setupLocal()
     }
 
     private fun setupLocal() {
@@ -53,5 +58,6 @@ class ProfileFragment : Fragment() {
         Glide.with(this).load(IMAGE_BASE + "/kU3B75TyRiCgE270EyZnHjfivoq.jpg").into(binding.imgProfilePic)
 
     }
+
 
 }

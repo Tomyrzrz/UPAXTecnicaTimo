@@ -20,6 +20,7 @@ import com.google.firebase.storage.ktx.storage
 import com.softim.upaxtecnica.R
 import com.softim.upaxtecnica.data.utils.ExceptionDialogFragment
 import com.softim.upaxtecnica.databinding.FragmentGalleryBinding
+import com.softim.upaxtecnica.domain.CheckInternet
 import java.io.IOException
 import java.util.*
 
@@ -54,14 +55,11 @@ class GalleryFragment : Fragment() {
                 )
             }
         }
-
-
-
         return root
     }
 
     private fun uploadImage() {
-        if (filePath != null) {
+        if (CheckInternet.checkForInternet(requireContext())) {
             val sharedPreferences =
                 activity?.getSharedPreferences("user_gallery", AppCompatActivity.MODE_PRIVATE)
             val user_local = sharedPreferences?.getString("user", "")
@@ -110,6 +108,9 @@ class GalleryFragment : Fragment() {
                             )
                         }
                     })
+        }else{
+            ExceptionDialogFragment("You dont have internet for upload images", "No Internet")
+                .show(parentFragmentManager, ExceptionDialogFragment.TAG)
         }
     }
 

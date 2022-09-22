@@ -1,31 +1,27 @@
 package com.softim.upaxtecnica.ui.movies
 
+import android.content.ContentValues
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
-import androidx.lifecycle.viewModelScope
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.softim.upaxtecnica.R
-import com.softim.upaxtecnica.domain.data.adapters.AdapterMovies
+import com.softim.upaxtecnica.data.local.MoviesBDLocal
+import com.softim.upaxtecnica.data.utils.ExceptionDialogFragment
 import com.softim.upaxtecnica.databinding.FragmentMoviesBinding
+import com.softim.upaxtecnica.domain.CheckInternet
+import com.softim.upaxtecnica.domain.data.adapters.AdapterMovies
 import com.softim.upaxtecnica.domain.data.models.Movie
-import com.softim.upaxtecnica.domain.data.models.MoviesResponse
-import com.softim.upaxtecnica.domain.data.services.MovieAPIInterface
-import com.softim.upaxtecnica.domain.data.services.MovieApiService
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.currentCoroutineContext
-import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MoviesFragment : Fragment(), AdapterView.OnItemSelectedListener {
+
     private lateinit var binding: FragmentMoviesBinding
+    private var moviesLocal = mutableListOf<Movie>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,7 +41,10 @@ class MoviesFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 layoutManager = LinearLayoutManager(context)
                 adapter = AdapterMovies(items)
             }
+            moviesLocal.addAll(items)
+            setupLocalBDMovies(items)
         }
+        setupLocalBDMovies(mutableListOf())
 
         val categories = resources.getStringArray(R.array.movies_array)
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, categories)
@@ -53,10 +52,53 @@ class MoviesFragment : Fragment(), AdapterView.OnItemSelectedListener {
         binding.spnCategory.setSelection(0)
         binding.spnCategory.onItemSelectedListener = this
         viewModel.category.observe(viewLifecycleOwner) { cate ->
-            Toast.makeText(requireContext(),cate,Toast.LENGTH_SHORT).show()
             viewModel.updateMovieData(cate){
                 binding.rcvMovies.adapter = AdapterMovies(it)
+                moviesLocal.addAll(it)
+                setupLocalBDMovies(it)
             }
+        }
+    }
+
+    private fun setupLocalBDMovies(movies: List<Movie>) {
+        val admin = MoviesBDLocal(requireContext(), "movies_bd", null, 1)
+
+        if (CheckInternet.checkForInternet(requireContext())) {
+            val bd = admin.writableDatabase
+            bd.delete("movies", null, null)
+            for (movie in movies) {
+                val registro = ContentValues()
+                registro.put("id", movie.id)
+                registro.put("title", movie.title)
+                registro.put("overview", movie.overview)
+                registro.put("poster_path", movie.poster)
+                registro.put("vote_average", movie.vote_average)
+                bd.insert("movies", null, registro)
+            }
+            bd.close()
+        } else {
+            val bd = admin.writableDatabase
+            val fila = bd.rawQuery("select * from movies", null)
+            if (fila.moveToFirst()) {
+                moviesLocal.clear()
+                do {
+                    val mov = Movie(fila.getInt(0).toString(), fila.getString(1),
+                        fila.getString(2), fila.getString(3), fila.getString(4))
+                    moviesLocal.add(mov)
+                } while (fila.moveToNext())
+                binding.rcvMovies.apply {
+                    setHasFixedSize(true)
+                    layoutManager = LinearLayoutManager(context)
+                    adapter = AdapterMovies(moviesLocal)
+                    binding.rcvMovies.adapter?.notifyDataSetChanged()
+                }
+            } else {
+                ExceptionDialogFragment(
+                    "Debes conectarte a Internet, No hay Datos por Mostrar",
+                    "No Internet"
+                ).show(parentFragmentManager, ExceptionDialogFragment.TAG)
+            }
+            bd.close()
         }
     }
 

@@ -10,7 +10,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.softim.upaxtecnica.R
 import com.softim.upaxtecnica.databinding.ActivityMainBinding
-import com.softim.upaxtecnica.domain.LocationsService
+import com.softim.upaxtecnica.domain.core.LocationService
 import com.softim.upaxtecnica.ui.gallery.GalleryFragment
 import com.softim.upaxtecnica.ui.maps.MapsFragment
 import com.softim.upaxtecnica.ui.movies.MoviesFragment
@@ -29,8 +29,9 @@ class MainActivity : AppCompatActivity() {
         createNotificationChannel()
         replaceFragment(ProfileFragment())
         setupMenu()
-        Intent(this, LocationsService::class.java).also { intent ->
+        Intent(this, LocationService::class.java).also { intent ->
             startService(intent)
+
         }
     }
 
