@@ -31,7 +31,6 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.softim.upaxtecnica.R
 import com.softim.upaxtecnica.data.models.UserLocations
 import com.softim.upaxtecnica.data.utils.ExceptionDialogFragment
-import android.text.format.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -41,7 +40,7 @@ class MapsFragment : Fragment(), GoogleMap.OnMyLocationButtonClickListener, Goog
     private var longitud: Double = 0.0
     private var latitud: Double = 0.0
 
-    private val CHANNEL_ID = "MOVIESAPI"
+    private val CHANNELID = "123456"
     private lateinit var fRef : FirebaseFirestore
     private lateinit var ref: DocumentReference
 
@@ -68,7 +67,7 @@ class MapsFragment : Fragment(), GoogleMap.OnMyLocationButtonClickListener, Goog
                             for (doc in value){
                                 val user = doc.toObject(UserLocations::class.java)
                                 val location = LatLng(user.latitude!!, user.longitude!!)
-                                val sdf = SimpleDateFormat("MM/dd/yyyy hh:mm aa")
+                                val sdf = SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.ENGLISH)
                                 val netDate = Date((user.time?.seconds.toString()).toLong() * 1000)
                                 val dat = sdf.format(netDate)
                                 map.addMarker(
@@ -170,7 +169,7 @@ class MapsFragment : Fragment(), GoogleMap.OnMyLocationButtonClickListener, Goog
     }*/
 
     private fun notificationLocation(msj: String) {
-        val builder = NotificationCompat.Builder(requireContext(), CHANNEL_ID)
+        val builder = NotificationCompat.Builder(requireContext(), CHANNELID)
             .setSmallIcon(R.mipmap.ic_launcher)
             .setContentTitle("Your Location is")
             .setContentText(msj)

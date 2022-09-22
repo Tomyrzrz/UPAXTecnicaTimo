@@ -26,7 +26,7 @@ import com.softim.upaxtecnica.ui.profile.ProfileFragment
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val CHANNEL_ID = "MOVIESAPI"
+    private val CHANNELID = "123456"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
             val name = getString(R.string.channel_name)
             val descriptionText = getString(R.string.channel_description)
             val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+            val channel = NotificationChannel(CHANNELID, name, importance).apply {
                 description = descriptionText
             }
             val notificationManager: NotificationManager =
