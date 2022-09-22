@@ -7,62 +7,84 @@
     android:background="@drawable/fondoprofile"
     tools:context=".ui.profile.ProfileFragment">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_profile_pic"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="40dp"
-            android:src="@drawable/ic_user_pic"
-            app:civ_border_width="2dp"
-            app:civ_border_color="#99000000"
-            app:layout_constraintBottom_toTopOf="@+id/txt_name_profile"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/padding_large"
+            android:layout_margin="@dimen/margin_large"
+            app:cardCornerRadius="@dimen/corners_general"
+            app:cardBackgroundColor="@color/violet"
+            app:cardElevation="@dimen/card_elevation"
+            >
 
-        <TextView
-            android:id="@+id/txt_name_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/title_profile"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:maxLines="1"
-            app:layout_constraintBottom_toTopOf="@+id/txt_biography"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_profile_pic" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/txt_biography"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/txt_email"
-            android:textColor="@color/white"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textStyle="bold"
-            android:maxLines="3"
-            app:layout_constraintBottom_toTopOf="@+id/txt_popularity"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_name_profile" />
+                        <TextView
+                            android:id="@+id/txt_title_profile"
+                            style="@style/titlesText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:text="@string/txt_profile"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginTop="@dimen/margin_large"
+                            app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/txt_popularity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/txt_reviews"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_biography"
-            app:layout_constraintVertical_bias="0.165" />
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/img_profile_pic"
+                            android:layout_width="@dimen/img_prof_width"
+                            android:layout_height="@dimen/img_prof_height"
+                            android:src="@drawable/ic_user_pic"
+                            app:civ_border_color="#99000000"
+                            app:civ_border_width="2dp"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_name_profile"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.498"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/txt_name_profile"
+                            style="@style/whiteText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:text="@string/txt_name"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_biography"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/img_profile_pic" />
+
+                        <TextView
+                            android:id="@+id/txt_biography"
+                            style="@style/whiteText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="3"
+                            android:text="@string/txt_overview"
+                            app:layout_constraintBottom_toTopOf="@+id/txt_popularity"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_name_profile" />
+
+                        <TextView
+                            android:id="@+id/txt_popularity"
+                            style="@style/whiteText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/txt_popularity"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_biography"
+                            app:layout_constraintVertical_bias="0.165" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -115,7 +115,7 @@ class GalleryFragment : Fragment() {
     }
 
     private fun clearData() {
-        binding.imgUploadPhoto.setImageResource(R.drawable.ic_baseline_camera_enhance_24)
+        binding.imgUploadPhoto.setImageResource(R.drawable.select)
         filePath = null
         val message = "Image Upload Complete"
         ExceptionDialogFragment(message,"Complete").show(

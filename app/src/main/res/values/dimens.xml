@@ -6,6 +6,17 @@
     <dimen name="margin_medium">8dp</dimen>
     <dimen name="margin_large">12dp</dimen>
     <dimen name="margin_xlarge">16dp</dimen>
+    <dimen name="padding_small">12dp</dimen>
+    <dimen name="padding_medium">16dp</dimen>
+    <dimen name="padding_large">22dp</dimen>
+    <dimen name="padding_xlarge">28dp</dimen>
+    <dimen name="corners_general">16dp</dimen>
+    <dimen name="card_elevation">6dp</dimen>
     <dimen name="titles">24sp</dimen>
     <dimen name="texts">18sp</dimen>
+    <dimen name="img_prof_height">150dp</dimen>
+    <dimen name="img_prof_width">150dp</dimen>
+    <dimen name="img_gallery_height">250dp</dimen>
+    <dimen name="img_gallery_width">250dp</dimen>
+
 </resources>

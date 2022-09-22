@@ -29,16 +29,12 @@ class ProfileFragment : Fragment() {
         val profileViewModel = ProfileViewModel()
         val IMAGE_BASE = "https://image.tmdb.org/t/p/w500/"
         profileViewModel.profile.observe(viewLifecycleOwner) { person ->
-            if (person != null) {
-                binding.txtNameProfile.text = person.name
-                binding.txtBiography.text = person.biography
-                "Popularity: ${person.popularity}".also { binding.txtPopularity.text = it }
-                Glide.with(this).load(IMAGE_BASE + person.profile_path).into(binding.imgProfilePic)
-            } else
-                setupLocal()
+            binding.txtNameProfile.text = person.name
+            binding.txtBiography.text = person.biography
+            "Popularity: ${person.popularity}".also { binding.txtPopularity.text = it }
+            Glide.with(this).load(IMAGE_BASE + person.profile_path).into(binding.imgProfilePic)
         }
-        if(!CheckInternet.checkForInternet(requireContext()))
-            setupLocal()
+        setupLocal()
     }
 
     private fun setupLocal() {

@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:contentDescription="@string/channel_name"
+        style="@style/titlesText"
         app:layout_constraintEnd_toEndOf="parent"
         android:entries="@array/movies_array"
 
