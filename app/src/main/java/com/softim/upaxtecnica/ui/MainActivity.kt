@@ -1,5 +1,6 @@
 package com.softim.upaxtecnica.ui
 
+import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -8,7 +9,13 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.softim.upaxtecnica.R
+import com.softim.upaxtecnica.data.utils.ExceptionDialogFragment
 import com.softim.upaxtecnica.databinding.ActivityMainBinding
 import com.softim.upaxtecnica.domain.core.LocationService
 import com.softim.upaxtecnica.ui.gallery.GalleryFragment
@@ -29,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         createNotificationChannel()
         replaceFragment(ProfileFragment())
         setupMenu()
+        requestPermissions()
         Intent(this, LocationService::class.java).also { intent ->
             startService(intent)
 
@@ -63,12 +71,42 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-
     private fun replaceFragment(fragment: Fragment){
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.activity_main_nav_host_fragment, fragment)
         fragmentTransaction.commit()
     }
+
+    private fun requestPermissions() {
+        Dexter.withActivity(this)
+            .withPermissions(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+            .withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(multiplePermissionsReport: MultiplePermissionsReport) {
+                    if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied) {
+                        val message = "Debes aceptar los permisos de ubicacion."
+                        ExceptionDialogFragment(message, "Warming").show(
+                            supportFragmentManager,
+                            ExceptionDialogFragment.TAG
+                        )
+                    }
+                }
+                override fun onPermissionRationaleShouldBeShown(
+                    list: List<PermissionRequest?>?,
+                    permissionToken: PermissionToken
+                ) {
+                    permissionToken.continuePermissionRequest()
+                }
+            }).withErrorListener {
+                val message = "Error"
+                ExceptionDialogFragment(message,"Error").show(
+                    supportFragmentManager,
+                    ExceptionDialogFragment.TAG
+                )
+            }            .onSameThread().check()
+    }
+
 }

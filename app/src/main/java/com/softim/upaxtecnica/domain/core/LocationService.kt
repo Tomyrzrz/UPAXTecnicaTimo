@@ -76,7 +76,7 @@ class LocationService: Service(){
     }
 
     private fun saveLocations(location: Location?) {
-        val preferences = applicationContext.getSharedPreferences("myPrefs_capture_gps_per_hour", Context.MODE_PRIVATE)
+        val preferences = applicationContext.getSharedPreferences("user_gallery", Context.MODE_PRIVATE)
         val user_local = preferences?.getString("user", "")
         val uniqueID = UUID.randomUUID().toString()
 
@@ -105,6 +105,16 @@ class LocationService: Service(){
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         Log.e(TAG, "onStartCommand")
+        val myHandler = Handler(Looper.getMainLooper())
+
+        myHandler.post(object : Runnable {
+            override fun run() {
+                Thread.sleep(60000)
+                notifica("Latitude: ${mLastLocation.latitude} Longitude: ${mLastLocation.longitude}")
+                saveLocations(mLastLocation)
+                myHandler.postDelayed(this, 300000 )
+            }
+        })
         super.onStartCommand(intent, flags, startId)
         return START_STICKY
     }
@@ -124,16 +134,7 @@ class LocationService: Service(){
         } catch (ex: IllegalArgumentException) {
             Log.d(TAG, "network provider does not exist, " + ex.message)
         }
-        val myHandler = Handler(Looper.getMainLooper())
 
-        myHandler.post(object : Runnable {
-            override fun run() {
-                Thread.sleep(1000)
-                notifica("Latitude: ${mLastLocation.latitude} Longitude: ${mLastLocation.longitude}")
-                saveLocations(mLastLocation)
-                myHandler.postDelayed(this, 300000 )
-            }
-        })
     }
 
     override fun onDestroy() {

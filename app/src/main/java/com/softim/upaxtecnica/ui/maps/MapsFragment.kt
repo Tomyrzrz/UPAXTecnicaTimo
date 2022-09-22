@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -56,7 +57,10 @@ class MapsFragment : Fragment(), GoogleMap.OnMyLocationButtonClickListener, Goog
 
         myHandler.post(object : Runnable {
             override fun run() {
-                fRef.collectionGroup("locations").orderBy("time").limitToLast(1)
+                val sharedPreferences = activity?.getSharedPreferences("user_gallery", AppCompatActivity.MODE_PRIVATE)
+                val user_local = sharedPreferences?.getString("user", "")
+                fRef.collection("moviesAPIuser").document(user_local!!)
+                    .collection("locations").orderBy("time").limitToLast(1)
                     .addSnapshotListener { value, error ->
                         if (value != null) {
                             for (doc in value){
