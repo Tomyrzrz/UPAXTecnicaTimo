@@ -1,15 +1,12 @@
 package com.softim.upaxtecnica.ui.profile
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.softim.upaxtecnica.R
-import com.softim.upaxtecnica.databinding.FragmentMoviesBinding
 import com.softim.upaxtecnica.databinding.FragmentProfileBinding
-import com.softim.upaxtecnica.domain.CheckInternet
 
 class ProfileFragment : Fragment() {
 

@@ -1,11 +1,8 @@
 package com.softim.upaxtecnica.ui.movies
 
-import android.content.ContentValues
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.softim.upaxtecnica.data.local.MoviesBDLocal
 import com.softim.upaxtecnica.domain.data.models.Movie
 import com.softim.upaxtecnica.domain.data.models.MoviesResponse
 import com.softim.upaxtecnica.domain.data.services.MovieAPIInterface
