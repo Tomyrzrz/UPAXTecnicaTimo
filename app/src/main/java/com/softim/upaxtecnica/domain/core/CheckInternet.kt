@@ -1,4 +1,4 @@
-package com.softim.upaxtecnica.domain
+package com.softim.upaxtecnica.domain.core
 
 import android.content.Context
 import android.net.ConnectivityManager

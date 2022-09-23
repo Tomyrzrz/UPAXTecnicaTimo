@@ -30,7 +30,7 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.softim.upaxtecnica.R
 import com.softim.upaxtecnica.data.models.UserLocations
-import com.softim.upaxtecnica.data.utils.ExceptionDialogFragment
+import com.softim.upaxtecnica.ui.utils.ExceptionDialogFragment
 import java.text.SimpleDateFormat
 import java.util.*
 

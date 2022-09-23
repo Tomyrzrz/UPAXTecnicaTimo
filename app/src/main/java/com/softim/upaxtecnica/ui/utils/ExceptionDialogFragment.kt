@@ -1,4 +1,4 @@
-package com.softim.upaxtecnica.data.utils
+package com.softim.upaxtecnica.ui.utils
 
 import android.app.Dialog
 import android.os.Bundle

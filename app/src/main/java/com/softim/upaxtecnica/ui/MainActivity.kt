@@ -15,7 +15,7 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.softim.upaxtecnica.R
-import com.softim.upaxtecnica.data.utils.ExceptionDialogFragment
+import com.softim.upaxtecnica.ui.utils.ExceptionDialogFragment
 import com.softim.upaxtecnica.databinding.ActivityMainBinding
 import com.softim.upaxtecnica.domain.core.LocationService
 import com.softim.upaxtecnica.ui.gallery.GalleryFragment

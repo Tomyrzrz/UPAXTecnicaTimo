@@ -11,9 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.softim.upaxtecnica.R
 import com.softim.upaxtecnica.data.local.MoviesBDLocal
-import com.softim.upaxtecnica.data.utils.ExceptionDialogFragment
+import com.softim.upaxtecnica.ui.utils.ExceptionDialogFragment
 import com.softim.upaxtecnica.databinding.FragmentMoviesBinding
-import com.softim.upaxtecnica.domain.CheckInternet
+import com.softim.upaxtecnica.domain.core.CheckInternet
 import com.softim.upaxtecnica.domain.data.adapters.AdapterMovies
 import com.softim.upaxtecnica.domain.data.models.Movie
 

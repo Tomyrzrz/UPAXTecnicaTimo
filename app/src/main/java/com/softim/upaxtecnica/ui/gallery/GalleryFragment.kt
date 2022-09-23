@@ -18,9 +18,9 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import com.google.firebase.storage.ktx.storage
 import com.softim.upaxtecnica.R
-import com.softim.upaxtecnica.data.utils.ExceptionDialogFragment
+import com.softim.upaxtecnica.ui.utils.ExceptionDialogFragment
 import com.softim.upaxtecnica.databinding.FragmentGalleryBinding
-import com.softim.upaxtecnica.domain.CheckInternet
+import com.softim.upaxtecnica.domain.core.CheckInternet
 import java.io.IOException
 import java.util.*
 
